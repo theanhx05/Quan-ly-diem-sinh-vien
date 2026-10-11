@@ -6,7 +6,7 @@ st.title("Quản lý điểm sinh viên")
 
 # 1. Tạo bảng dữ liệu điểm của 10 sinh viên
 data = {
-    "Ho_ten": ["An", "Bình", "Chi", "Dũng", "Hà", "Lan", "Minh", "Nam", "Phúc", "Trang"],
+    "Ho_ten": ["An", "Binh", "Chi", "Dung", "Ha", "Lan", "Minh", "Nam", "Phuc", "Trang"],
     "Chuyen_can": [8.0, 9.0, 7.0, 10.0, 8.5, 6.5, 9.5, 7.5, 8.0, 10.0],
     "Giua_ky": [7.0, 8.0, 6.0, 9.0, 7.5, 6.0, 8.5, 7.0, 8.0, 9.0],
     "Cuoi_ky": [8.0, 8.5, 5.5, 9.0, 7.0, 6.0, 9.0, 7.5, 7.0, 9.5]
