@@ -51,17 +51,26 @@ st.subheader("3. Xếp loại học lực sinh viên")
 st.dataframe(df)
 
 # 4. Thống kê điểm
+
 diem_tb = df["Tong_ket"].mean()
 sv_cao_nhat = df.loc[df["Tong_ket"].idxmax()]
 sv_thap_nhat = df.loc[df["Tong_ket"].idxmin()]
 so_sv_dat = (df["Tong_ket"] >= 5).sum()
 
-st.subheader("4. Thống kê chung")
-st.write(f"- **Điểm tổng kết trung bình:** {diem_tb:.2f}")
-st.write(f"- **Sinh viên cao nhất:** {sv_cao_nhat['Ho_ten']} ({sv_cao_nhat['Tong_ket']:.2f})")
-st.write(f"- **Sinh viên thấp nhất:** {sv_thap_nhat['Ho_ten']} ({sv_thap_nhat['Tong_ket']:.2f})")
-st.write(f"- **Số sinh viên đạt (điểm >= 5):** {so_sv_dat}")
-st.write(f"- **Số sinh viên chưa đạt:** {len(df) - so_sv_dat}")
+print(f"Điểm tổng kết trung bình: {diem_tb:.2f}")
+
+print(
+    f"Sinh viên cao nhất: {sv_cao_nhat['Ho_ten']} "
+    f" = {sv_cao_nhat['Tong_ket']:.2f}"
+)
+
+print(
+    f"Sinh viên thấp nhất: {sv_thap_nhat['Ho_ten']} "
+    f" = {sv_thap_nhat['Tong_ket']:.2f}"
+)
+
+print(f"Số sinh viên đạt (điểm >= 5): {so_sv_dat}")
+print(f"Số sinh viên chưa đạt: {len(df) - so_sv_dat}")
 
 # 5. Biểu đồ điểm
 st.subheader("5. Biểu đồ điểm tổng kết")
