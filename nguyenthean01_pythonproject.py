@@ -73,4 +73,4 @@ st.pyplot(fig)
 
 # 6. Hiển thị họ tên và MSSV ở cuối trang (chữ nhỏ)
 st.markdown("---")
-st.markdown("<p style='text-align: center; color: gray; font-size: small;'>Người thực hiện: Nguyễn Thế An | MSSV: [052208009424]</p>", unsafe_allow_html=True
+st.markdown("<p style='text-align: center; color: gray; font-size: small;'>Người thực hiện: Nguyễn Thế An | MSSV: [052208009424]</p>", unsafe_allow_html=True)
