@@ -1,15 +1,11 @@
-# -*- coding: utf-8 -*-
-""" 
-python
-
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 
 st.title("Quản lý điểm sinh viên")
 
-# 1. Tạo dataframe bảng điểm của 10 sinh viên
-data = 
+# 1. Tạo bảng dữ liệu điểm của 10 sinh viên
+data = {
     "Ho_ten": ["An", "Bình", "Chi", "Dũng", "Hà", "Lan", "Minh", "Nam", "Phúc", "Trang"],
     "Chuyen_can": [8.0, 9.0, 7.0, 10.0, 8.5, 6.5, 9.5, 7.5, 8.0, 10.0],
     "Giua_ky": [7.0, 8.0, 6.0, 9.0, 7.5, 6.0, 8.5, 7.0, 8.0, 9.0],
@@ -21,7 +17,7 @@ df = pd.DataFrame(data)
 st.subheader("1. Bảng điểm chi tiết")
 st.dataframe(df)
 
-# 2. Điểm tổng kết
+# 2. Tính điểm tổng kết
 df["Tong_ket"] = (
     0.2 * df["Chuyen_can"]
     + 0.3 * df["Giua_ky"]
@@ -34,7 +30,7 @@ df["Tong_ket"] = df["Tong_ket"].round(2)
 st.subheader("2. Bảng điểm sau khi tính tổng kết")
 st.dataframe(df)
 
-# 3. Xếp loại sinh viên
+# 3. Xếp loại học lực sinh viên
 def xep_loai(diem):
     if diem >= 8.5:
         return "Giỏi"
@@ -50,29 +46,20 @@ df["Xep_loai"] = df["Tong_ket"].apply(xep_loai)
 st.subheader("3. Xếp loại học lực sinh viên")
 st.dataframe(df)
 
-# 4. Thống kê điểm
-
+# 4. Thống kê chung
 diem_tb = df["Tong_ket"].mean()
 sv_cao_nhat = df.loc[df["Tong_ket"].idxmax()]
 sv_thap_nhat = df.loc[df["Tong_ket"].idxmin()]
 so_sv_dat = (df["Tong_ket"] >= 5).sum()
 
-print(f"Điểm tổng kết trung bình: {diem_tb:.2f}")
+st.subheader("4. Thống kê chung")
+st.write(f"- **Điểm tổng kết trung bình:** {diem_tb:.2f}")
+st.write(f"- **Sinh viên cao nhất:** {sv_cao_nhat['Ho_ten']} ({sv_cao_nhat['Tong_ket']:.2f})")
+st.write(f"- **Sinh viên thấp nhất:** {sv_thap_nhat['Ho_ten']} ({sv_thap_nhat['Tong_ket']:.2f})")
+st.write(f"- **Số sinh viên đạt (điểm >= 5):** {so_sv_dat}")
+st.write(f"- **Số sinh viên chưa đạt:** {len(df) - so_sv_dat}")
 
-print(
-    f"Sinh viên cao nhất: {sv_cao_nhat['Ho_ten']} "
-    f" = {sv_cao_nhat['Tong_ket']:.2f}"
-)
-
-print(
-    f"Sinh viên thấp nhất: {sv_thap_nhat['Ho_ten']} "
-    f" = {sv_thap_nhat['Tong_ket']:.2f}"
-)
-
-print(f"Số sinh viên đạt (điểm >= 5): {so_sv_dat}")
-print(f"Số sinh viên chưa đạt: {len(df) - so_sv_dat}")
-
-# 5. Biểu đồ điểm
+# 5. Biểu đồ điểm tổng kết
 st.subheader("5. Biểu đồ điểm tổng kết")
 
 fig, ax = plt.subplots(figsize=(10, 5))
