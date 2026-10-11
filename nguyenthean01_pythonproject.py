@@ -14,7 +14,7 @@ data = {
 
 df = pd.DataFrame(data)
 
-st.subheader("1. Bảng điểm chi tiết")
+st.subheader("1. Bảng điểm của 10 sinh viên")
 st.dataframe(df)
 
 # 2. Tính điểm tổng kết
