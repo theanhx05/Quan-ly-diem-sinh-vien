@@ -7,26 +7,26 @@ Original file is located at
     https://colab.research.google.com/drive/1VYmzkpXofXZOksOUARuw0tNq9Qbx9lmE
 """
 
-#1. Tạo dataframe bảng điểm của 10 sinh viên
+import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 
-data = {
-    "Ho_ten": [
-        "An", "Binh", "Chi", "Dung", "Ha",
-        "Lan", "Minh", "Nam", "Phuc", "Trang"
-    ],
+st.title("Quản lý điểm sinh viên")
+
+# 1. Tạo dataframe bảng điểm của 10 sinh viên
+data = 
+    "Ho_ten": ["An", "Bình", "Chi", "Dũng", "Hà", "Lan", "Minh", "Nam", "Phúc", "Trang"],
     "Chuyen_can": [8.0, 9.0, 7.0, 10.0, 8.5, 6.5, 9.5, 7.5, 8.0, 10.0],
-    "Giua_ky":    [7.0, 8.0, 6.0, 9.0, 7.5, 6.0, 8.5, 7.0, 8.0, 9.0],
-    "Cuoi_ky":   [8.0, 8.5, 5.5, 9.0, 7.0, 6.0, 9.0, 7.5, 7.0, 9.5]
+    "Giua_ky": [7.0, 8.0, 6.0, 9.0, 7.5, 6.0, 8.5, 7.0, 8.0, 9.0],
+    "Cuoi_ky": [8.0, 8.5, 5.5, 9.0, 7.0, 6.0, 9.0, 7.5, 7.0, 9.5]
 }
 
 df = pd.DataFrame(data)
 
-print(df.to_string(index=False))
+st.subheader("1. Bảng điểm chi tiết")
+st.dataframe(df)
 
-#2. Điểm tổng kết
-
+# 2. Điểm tổng kết
 df["Tong_ket"] = (
     0.2 * df["Chuyen_can"]
     + 0.3 * df["Giua_ky"]
@@ -36,10 +36,10 @@ df["Tong_ket"] = (
 # Làm tròn điểm đến 2 chữ số thập phân
 df["Tong_ket"] = df["Tong_ket"].round(2)
 
-print(df.to_string(index=False))
+st.subheader("2. Bảng điểm sau khi tính tổng kết")
+st.dataframe(df)
 
-#3. Xếp loại sinh viên
-
+# 3. Xếp loại sinh viên
 def xep_loai(diem):
     if diem >= 8.5:
         return "Giỏi"
@@ -52,35 +52,30 @@ def xep_loai(diem):
 
 df["Xep_loai"] = df["Tong_ket"].apply(xep_loai)
 
-print(df.to_string(index=False))
+st.subheader("3. Xếp loại học lực sinh viên")
+st.dataframe(df)
 
-#4. Thống kê điểm
-
+# 4. Thống kê điểm
 diem_tb = df["Tong_ket"].mean()
 sv_cao_nhat = df.loc[df["Tong_ket"].idxmax()]
 sv_thap_nhat = df.loc[df["Tong_ket"].idxmin()]
 so_sv_dat = (df["Tong_ket"] >= 5).sum()
 
-print(f"Điểm tổng kết trung bình: {diem_tb:.2f}")
+st.subheader("4. Thống kê chung")
+st.write(f"- **Điểm tổng kết trung bình:** {diem_tb:.2f}")
+st.write(f"- **Sinh viên cao nhất:** {sv_cao_nhat['Ho_ten']} ({sv_cao_nhat['Tong_ket']:.2f})")
+st.write(f"- **Sinh viên thấp nhất:** {sv_thap_nhat['Ho_ten']} ({sv_thap_nhat['Tong_ket']:.2f})")
+st.write(f"- **Số sinh viên đạt (điểm >= 5):** {so_sv_dat}")
+st.write(f"- **Số sinh viên chưa đạt:** {len(df) - so_sv_dat}")
 
-print(
-    f"Sinh viên cao nhất: {sv_cao_nhat['Ho_ten']} "
-    f" = {sv_cao_nhat['Tong_ket']:.2f}"
-)
+# 5. Biểu đồ điểm
+st.subheader("5. Biểu đồ điểm tổng kết")
 
-print(
-    f"Sinh viên thấp nhất: {sv_thap_nhat['Ho_ten']} "
-    f" = {sv_thap_nhat['Tong_ket']:.2f}"
-)
+fig, ax = plt.subplots(figsize=(10, 5))
+ax.bar(df["Ho_ten"], df["Tong_ket"])
+ax.set_xlabel("Tên sinh viên")
+ax.set_ylabel("Điểm")
+ax.set_title("Điểm tổng kết của 10 sinh viên")
+ax.set_ylim(0, 10)
 
-print(f"Số sinh viên đạt (điểm >= 5): {so_sv_dat}")
-print(f"Số sinh viên chưa đạt: {len(df) - so_sv_dat}")
-
-#5. Biểu đồ điểm
-
-plt.bar(df["Ho_ten"], df["Tong_ket"])
-plt.xlabel("Tên sinh viên")
-plt.ylabel("Điểm")
-plt.title("Điểm tổng kết của 10 sinh viên")
-plt.ylim(0, 10)
-plt.show()
+st.pyplot(fig)
