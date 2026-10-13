@@ -60,7 +60,7 @@ st.write(f"- **Số sinh viên đạt (điểm >= 5):** {so_sv_dat}")
 st.write(f"- **Số sinh viên chưa đạt:** {len(df) - so_sv_dat}")
 
 # Tạo danh sách xổ xuống để chọn sinh viên
-sinh_vien_duoc_chon = st.selectbox(
+ data = st.selectbox(
     "Chọn một sinh viên:",
     danh_sach_sinh_vien
 )
