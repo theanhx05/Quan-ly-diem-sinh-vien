@@ -59,12 +59,6 @@ st.write(f"- **Sinh viên thấp nhất:** {sv_thap_nhat['Ho_ten']} ({sv_thap_nh
 st.write(f"- **Số sinh viên đạt (điểm >= 5):** {so_sv_dat}")
 st.write(f"- **Số sinh viên chưa đạt:** {len(df) - so_sv_dat}")
 
-# Tạo danh sách xổ xuống để chọn sinh viên
- data = st.selectbox(
-    "Chọn một sinh viên:",
-    danh_sach_sinh_vien
-)
-st.write("Sinh viên bạn đã chọn là:", sinh_vien_duoc_chon)
 # 5. Biểu đồ điểm tổng kết
 st.subheader("5. Biểu đồ điểm tổng kết")
 
