@@ -64,7 +64,7 @@ sinh_vien_duoc_chon = st.selectbox(
     "Chọn một sinh viên:",
     danh_sach_sinh_vien
 )
-st.write("Sinh viên bạn đã chọn là:", sinh_vien_duoc_chon
+st.write("Sinh viên bạn đã chọn là:", sinh_vien_duoc_chon)
 # 5. Biểu đồ điểm tổng kết
 st.subheader("5. Biểu đồ điểm tổng kết")
 
